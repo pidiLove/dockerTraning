@@ -1,0 +1,17 @@
+部署image：
+cd docker
+mvn package docker:build
+
+启动：
+cd docker/src/main/docker
+docker-compose up
+
+单个image运行：
+docker run -it -p 8080:8080 springboot/docker  主机(宿主)端口:容器端口
+docker run -d -p 8080:8080 springboot/docker
+
+
+几个docker命令：
+docker rm $(docker ps -a -q)    移除所有已停止的容器
+docker ps 查看服务状态
+

@@ -1,0 +1,30 @@
+version: '2.2'
+services:
+  base:
+    image: springboot/docker
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - redis
+
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: docker
+      MYSQL_USER: test
+      MYSQL_PASSWORD: 123456
+    volumes:
+      - "./schema.sql:/schema.sql/"
+    ports:
+      - "3306:3306"
+
+  redis:
+      image: redis:4
+      ports:
+        - 6379:6379
+      volumes:
+        - ./redis-data/:/data:rw
+      command:
+        redis-server --requirepass 123456
